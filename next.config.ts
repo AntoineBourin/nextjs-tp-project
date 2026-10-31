@@ -3,9 +3,14 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "cdn.dummyjson.com", pathname: "/**" },
+    ],
+  },
   turbopack: {
     rules: {
-      "*.css": {
+      "globals.css": {
         loaders: ["@tailwindcss/turbopack"],
         as: "*.css",
       },

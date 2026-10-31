@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { products } from "@/lib/mocked/products";
 
@@ -32,6 +33,13 @@ export default async function Home({ searchParams }: PageProps<"/">) {
         <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((p) => (
             <li key={p.id} className="rounded border p-3">
+              <Image
+                src={p.thumbnail}
+                alt={p.title}
+                width={200}
+                height={200}
+                className="mb-2 h-40 w-full object-contain"
+              />
               <Link href={`/product/${p.id}`} className="font-semibold hover:underline">
                 {p.title}
               </Link>
