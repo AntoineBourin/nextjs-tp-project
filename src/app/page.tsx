@@ -7,7 +7,10 @@ export default async function Home({ searchParams }: PageProps<"/">) {
   const { query } = await searchParams;
   const q = (Array.isArray(query) ? query[0] : query)?.trim() ?? "";
 
-  const res = await fetch("https://dummyjson.com/products/category/smartphones");
+  const res = await fetch(
+    "https://dummyjson.com/products/category/smartphones",
+    { cache: "force-cache" },
+  );
   const { products }: { products: Product[] } = await res.json();
 
   const filtered = q
@@ -44,7 +47,10 @@ export default async function Home({ searchParams }: PageProps<"/">) {
                 height={200}
                 className="mb-2 h-40 w-full object-contain"
               />
-              <Link href={`/product/${p.id}`} className="font-semibold hover:underline">
+              <Link
+                href={`/product/${p.id}`}
+                className="font-semibold hover:underline"
+              >
                 {p.title}
               </Link>
               <p className="text-sm text-zinc-600">{p.brand}</p>
