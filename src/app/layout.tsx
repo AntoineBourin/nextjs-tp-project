@@ -43,6 +43,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 À propos
               </Link>
               <FavoritesLink />
+              <Link href="/admin" className="hover:underline">
+                Admin
+              </Link>
               <Link href="/style-module" className="hover:underline">
                 Style module
               </Link>
