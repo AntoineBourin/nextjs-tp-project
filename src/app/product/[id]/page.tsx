@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { products } from "@/lib/mocked/products";
@@ -16,6 +17,18 @@ export default async function ProductPage({
         ← Retour
       </Link>
       <h1 className="text-2xl font-bold">{product.title}</h1>
+      <div className="flex flex-wrap gap-2">
+        {product.images.map((src, i) => (
+          <Image
+            key={src}
+            src={src}
+            alt={`${product.title} ${i + 1}`}
+            width={240}
+            height={240}
+            className="h-48 w-48 rounded border object-contain"
+          />
+        ))}
+      </div>
       <p className="text-sm text-zinc-600">
         {product.brand} · {product.category}
       </p>
