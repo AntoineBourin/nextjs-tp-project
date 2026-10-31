@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import FavoriteButton from "@/components/FavoriteButton";
 import type { Product } from "@/lib/mocked/products";
 
 export default async function ProductPage({
@@ -36,6 +37,16 @@ export default async function ProductPage({
       </p>
       <p>{product.description}</p>
       <p className="font-semibold">{product.price} €</p>
+      <div>
+        <FavoriteButton
+          product={{
+            id: product.id,
+            title: product.title,
+            thumbnail: product.thumbnail,
+            price: product.price,
+          }}
+        />
+      </div>
       <p className="text-sm">
         Note : {product.rating}/5 · Stock : {product.stock}
       </p>
