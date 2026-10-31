@@ -1,15 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { products } from "@/lib/mocked/products";
+import type { Product } from "@/lib/mocked/products";
 
 export default async function ProductPage({
   params,
 }: PageProps<"/product/[id]">) {
   const { id } = await params;
-  const product = products.find((p) => String(p.id) === id);
+  const res = await fetch(`https://dummyjson.com/products/${id}`);
 
-  if (!product) notFound();
+  if (!res.ok) notFound();
+
+  const product: Product = await res.json();
 
   return (
     <div className="flex flex-col gap-2">

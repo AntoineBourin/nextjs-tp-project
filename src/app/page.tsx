@@ -1,10 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { products } from "@/lib/mocked/products";
+import type { Product } from "@/lib/mocked/products";
 
 export default async function Home({ searchParams }: PageProps<"/">) {
   const { query } = await searchParams;
   const q = (Array.isArray(query) ? query[0] : query)?.trim() ?? "";
+
+  const res = await fetch("https://dummyjson.com/products/category/smartphones");
+  const { products }: { products: Product[] } = await res.json();
 
   const filtered = q
     ? products.filter((p) => p.title.toLowerCase().includes(q.toLowerCase()))
