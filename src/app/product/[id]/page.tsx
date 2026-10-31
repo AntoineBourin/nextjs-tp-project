@@ -5,6 +5,10 @@ import FavoriteButton from "@/components/FavoriteButton";
 import { getProduct } from "@/lib/products";
 import type { Product } from "@/lib/mocked/products";
 
+// Erreur au build si un élément rend cette page dynamique (cookies, headers,
+// searchParams, fetch no-store…).
+export const dynamic = "error";
+
 export async function generateStaticParams() {
   const res = await fetch(
     "https://dummyjson.com/products/category/smartphones",

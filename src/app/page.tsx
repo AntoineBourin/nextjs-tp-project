@@ -3,13 +3,16 @@ import Link from "next/link";
 import FavoriteButton from "@/components/FavoriteButton";
 import type { Product } from "@/lib/mocked/products";
 
+// Le cache de la page d'accueil est invalidé toutes les 10 minutes.
+export const revalidate = 600;
+
 export default async function Home({ searchParams }: PageProps<"/">) {
   const { query } = await searchParams;
   const q = (Array.isArray(query) ? query[0] : query)?.trim() ?? "";
 
   const res = await fetch(
     "https://dummyjson.com/products/category/smartphones",
-    { cache: "force-cache" },
+    { cache: "force-cache", next: { tags: ["products"] } },
   );
   const { products }: { products: Product[] } = await res.json();
 
