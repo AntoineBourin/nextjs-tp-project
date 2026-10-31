@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import FavoriteButton from "@/components/FavoriteButton";
 import type { Product } from "@/lib/mocked/products";
 
 export default async function Home({ searchParams }: PageProps<"/">) {
@@ -48,6 +49,14 @@ export default async function Home({ searchParams }: PageProps<"/">) {
               </Link>
               <p className="text-sm text-zinc-600">{p.brand}</p>
               <p>{p.price} €</p>
+              <FavoriteButton
+                product={{
+                  id: p.id,
+                  title: p.title,
+                  thumbnail: p.thumbnail,
+                  price: p.price,
+                }}
+              />
             </li>
           ))}
         </ul>
