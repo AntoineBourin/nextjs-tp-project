@@ -1,24 +1,44 @@
+import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import FavoriteButton from "@/components/FavoriteButton";
+import { getProduct } from "@/lib/products";
 import type { Product } from "@/lib/mocked/products";
+
+export async function generateStaticParams() {
+  const res = await fetch(
+    "https://dummyjson.com/products/category/smartphones",
+    { cache: "force-cache" },
+  );
+  const { products }: { products: Product[] } = await res.json();
+
+  return products.map((p) => ({ id: String(p.id) }));
+}
+
+export async function generateMetadata({
+  params,
+}: PageProps<"/product/[id]">): Promise<Metadata> {
+  const { id } = await params;
+  const product = await getProduct(id);
+
+  if (!product) {
+    return {};
+  }
+
+  return { title: product.title, description: product.description };
+}
 
 export default async function ProductPage({
   params,
 }: PageProps<"/product/[id]">) {
   const { id } = await params;
-  const res = await fetch(`https://dummyjson.com/products/${id}`);
 
-  if (!res.ok) notFound();
+  const product = await getProduct(id);
 
-  const product: Product = await res.json();
+  if (!product) notFound();
 
   return (
     <div className="flex flex-col gap-2">
-      <Link href="/" className="text-sm hover:underline">
-        ← Retour
-      </Link>
       <h1 className="text-2xl font-bold">{product.title}</h1>
       <div className="flex flex-wrap gap-2">
         {product.images.map((src, i) => (
