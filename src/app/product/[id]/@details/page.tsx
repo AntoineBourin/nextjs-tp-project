@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import FavoriteButton from "@/components/FavoriteButton";
+import PreOrderForm from "@/components/PreOrderForm";
 import { getProduct } from "@/lib/products";
 
 export default async function ProductDetails({
@@ -45,6 +46,7 @@ export default async function ProductDetails({
       <p className="text-sm">
         Note : {product.rating}/5 · Stock : {product.stock}
       </p>
+      <PreOrderForm />
     </div>
   );
 }
