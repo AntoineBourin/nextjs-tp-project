@@ -1,12 +1,7 @@
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import LogoutButton from "@/components/LogoutButton";
 
-export default async function AdminPage() {
-  const cookieStore = await cookies();
-
-  if (!cookieStore.has("isAdmin")) redirect("/access-denied");
-
+// L'accès est protégé par le proxy (src/proxy.ts).
+export default function AdminPage() {
   return (
     <div className="flex flex-col gap-4">
       <h1 className="text-2xl font-bold">Administration</h1>
