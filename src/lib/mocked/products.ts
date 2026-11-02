@@ -10,6 +10,15 @@ export interface Product {
   category: string;
   thumbnail: string;
   images: Array<string>;
+  reviews: Array<Review>;
+}
+
+export interface Review {
+  rating: number;
+  comment: string;
+  date: string;
+  reviewerName: string;
+  reviewerEmail: string;
 }
 
 export const products = [
