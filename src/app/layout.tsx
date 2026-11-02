@@ -46,6 +46,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               <Link href="/admin" className="hover:underline">
                 Admin
               </Link>
+              <Link href="/login" className="hover:underline">
+                Se connecter
+              </Link>
               <Link href="/style-module" className="hover:underline">
                 Style module
               </Link>
