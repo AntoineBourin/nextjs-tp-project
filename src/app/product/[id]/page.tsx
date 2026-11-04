@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import FavoriteButton from "@/components/FavoriteButton";
 import { getProduct } from "@/lib/products";
 import type { Product } from "@/lib/mocked/products";
+import Form from "./Form";
 
 // Erreur au build si un élément rend cette page dynamique (cookies, headers,
 // searchParams, fetch no-store…).
@@ -74,6 +75,7 @@ export default async function ProductPage({
       <p className="text-sm">
         Note : {product.rating}/5 · Stock : {product.stock}
       </p>
+      <Form productId={id} />
     </div>
   );
 }
